@@ -1,6 +1,3 @@
-Certainly! Here's a comprehensive README.md file that compiles all the information we've discussed for your Python module:
-
-```markdown
 # Local LLM-based RAG System
 
 This project implements a Retrieval-Augmented Generation (RAG) system using a locally run Large Language Model (LLM) on macOS. It processes a directory of documents, creates embeddings, and allows for question-answering based on the document content.
@@ -146,10 +143,3 @@ To reinstall all dependencies:
 - Adjust the model size or settings if you encounter performance issues.
 - GGUF (GPT-Generated Unified Format) files are optimized for running LLMs on consumer hardware.
 
-## License
-
-[Specify your license here]
-
-```
-
-This README provides a comprehensive guide for setting up and using your local LLM-based RAG system, including installation steps, usage instructions, troubleshooting tips, and notes on redownloading dependencies. You can further customize this README to include any specific details about your implementation or additional features of your project.
