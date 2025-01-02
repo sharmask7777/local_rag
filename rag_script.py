@@ -33,6 +33,6 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # Example query
-query = "When is arnav's birthday?"
+query = "Sample query"
 response = qa_chain.run(query)
 print(response)
