@@ -9,6 +9,12 @@ This project implements a Retrieval-Augmented Generation (RAG) system using a lo
 - Python 3.x
 - Xcode Command Line Tools
 
+# To run
+
+```
+python rag_script.py "what do my notes say about contract testing?"
+```
+
 ## Installation
 
 1. Install Xcode Command Line Tools:
