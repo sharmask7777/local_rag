@@ -1,0 +1,25 @@
+model:
+  path: ./models/llama-2-7b-chat.Q4_K_M.gguf  # Path to your existing model
+  context_size: 4096  # Optimized for 16GB RAM
+  gpu_layers: -1  # Use all available GPU layers on M2 Pro
+  use_mlock: true  # Lock memory to prevent swapping
+  f16_kv: true  # Use half-precision for better performance
+
+embedding:
+  model_name: BAAI/bge-small-en-v1.5  # Better performance than all-MiniLM-L6-v2
+  use_gpu: true  # Use MPS acceleration on M2 Pro
+
+vectordb:
+  type: qdrant
+  location: ./qdrant_db
+  collection_name: documents
+  distance: Cosine
+
+documents:
+  directory: ./documents
+  chunk_size: 500  # Smaller chunks for better retrieval precision
+  chunk_overlap: 100  # Ensure context is maintained between chunks
+
+retrieval:
+  k: 4  # Number of documents to retrieve (limited for 16GB RAM)
+  use_hybrid_search: true  # Combine keyword and semantic search 

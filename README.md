@@ -1,6 +1,126 @@
-# Local LLM-based RAG System
+# Local LLM-based RAG System (Optimized for M2 Pro Mac)
 
-This project implements a Retrieval-Augmented Generation (RAG) system using a locally run Large Language Model (LLM) on macOS. It processes a directory of documents, creates embeddings, and allows for question-answering based on the document content.
+This project implements a Retrieval-Augmented Generation (RAG) system using a locally run Large Language Model (LLM) on macOS, specifically optimized for M2 Pro with 16GB RAM. It processes a directory of documents, creates embeddings, and allows for question-answering based on the document content.
+
+## 🚀 Latest Improvements
+
+This version includes several optimizations for M2 Pro Macs:
+- Better embedding model (BAAI/bge-small-en-v1.5) with MPS acceleration
+- Qdrant vector database for persistent storage and better retrieval
+- Hybrid search combining keyword and semantic search
+- Conversation memory for follow-up questions
+- Optimized LLM parameters for Apple Silicon
+- A configuration system for easy customization
+
+## 📋 Prerequisites
+
+- macOS (optimized for Apple Silicon)
+- Python 3.9+
+- Homebrew (for system dependencies)
+
+## 🔧 Quick Setup
+
+1. **Install dependencies**:
+   ```bash
+   # Create and activate virtual environment
+   python -m venv venv
+   source venv/bin/activate
+   
+   # Install Python packages
+   pip install -r requirements.txt
+   
+   # Install system dependencies (if not already done)
+   brew install libmagic poppler tesseract
+   ```
+
+2. **Download a model**:
+   ```bash
+   # Download Llama 2 7B (recommended for M2 Pro with 16GB RAM)
+   python download_model.py --model llama2
+   
+   # For higher accuracy (requires more RAM):
+   # python download_model.py --model llama3  # This downloads Llama 2 13B
+   
+   # Alternative model:
+   # python download_model.py --model mistral  # Mistral 7B
+   ```
+
+3. **Prepare your documents**:
+   Place your PDF documents in the `documents` directory.
+
+4. **Run the system**:
+   ```bash
+   python rag_script.py "What do my documents say about..."
+   ```
+
+## ⚙️ Configuration
+
+The system uses a `config.yaml` file for customization. Key settings:
+
+```yaml
+model:
+  path: ./models/llama-2-7b-chat.Q4_K_M.gguf  # Model path
+  context_size: 4096  # Context window size (adjust based on RAM)
+  
+embedding:
+  model_name: BAAI/bge-small-en-v1.5  # Embedding model
+  use_gpu: true  # Use MPS acceleration
+
+documents:
+  chunk_size: 500  # Document chunk size
+  chunk_overlap: 100  # Overlap between chunks
+
+retrieval:
+  k: 4  # Number of documents to retrieve
+  use_hybrid_search: true  # Use both keyword and semantic search
+```
+
+## 📁 Project Structure
+
+```
+local_rag/
+│
+├── venv/                      # Virtual environment
+├── models/                    # LLM models 
+│   └── llama-2-7b-chat.Q4_K_M.gguf
+├── documents/                 # Your documents
+│   └── (your PDFs)
+├── qdrant_db/                 # Vector database storage
+├── config.yaml                # Configuration file
+├── rag_script.py              # Main RAG script
+├── download_model.py          # Model downloading utility
+└── requirements.txt           # Python dependencies
+```
+
+## 🔍 Usage Examples
+
+1. **Basic question**:
+   ```bash
+   python rag_script.py "What are the key concepts in this document?"
+   ```
+
+2. **Interactive mode**:
+   ```bash
+   python rag_script.py
+   # Then enter your question when prompted
+   ```
+
+3. **Download a different model**:
+   ```bash
+   python download_model.py --model mistral
+   ```
+
+## 🔧 Troubleshooting
+
+- **Out of memory errors**: Reduce `context_size` in config.yaml to 2048 or 1024
+- **Slow performance**: Ensure MPS acceleration is working with `use_gpu: true`
+- **Document loading issues**: Check file format compatibility and system dependencies
+
+## 📝 Notes
+
+- The performance depends on your Mac's specifications. The configuration is optimized for M2 Pro with 16GB RAM.
+- For better performance with larger documents, consider adjusting chunk size and overlap.
+- The system maintains conversation history for follow-up questions.
 
 ## Prerequisites
 
